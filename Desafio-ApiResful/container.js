@@ -4,6 +4,13 @@ module.exports = class Contenedor{
     constructor(fileName){
         this.fileName = fileName;
     }
+    addId(data) {
+		const ids = data.map((item) => item.id);
+		const maxId = Math.max(...ids);
+		let addId = maxId === -Infinity ? 0 : maxId;
+		addId++;
+		return addId;
+	}
 
     save = async(product) =>{
        try {
@@ -13,14 +20,13 @@ module.exports = class Contenedor{
 
                 if(data){
                     const products = JSON.parse(data);
-                    
+                    const id = this.addId(products);
                     const productExists = products.some(item => item.title === product.title);
-
                     if(productExists){
                         console.log(`El producto ${product.title} ya existe`)
                     }else{
                         const newProduct = {
-                            id: products.length + 1,  
+                            id,  
                             ...product
                         }
                         products.push(newProduct);
@@ -80,15 +86,19 @@ module.exports = class Contenedor{
     }   
     deleteById = async (id)=> {
         try {
-            const data = await this.getAll()
-            const deleteProduct = data.splice(id-1,1)
+			const contenido = await fs.promises.readFile(this.nameFile, 'utf-8');
+			if (contenido) {
+				const data = JSON.parse(contenido);
+				const newProductList = data.filter((item) => item.id !== id);
 
-            await fs.promises.writeFile(this.fileName, JSON.stringify([data], null, 2));
-
-            return deleteProduct
-        } catch (error) {
-            console.log(error)
-        }
+				await fs.promises.writeFile(this.nameFile,JSON.stringify(newProductList, null, 2));
+				return data.find((item) => item.id === id) || null;
+			} else {
+				throw new Error('No se encontró ningún producto para borrar');
+			}
+		} catch (error) {
+			console.log(error);
+		}
         
     }
     deleteAll = async()=>{
@@ -100,15 +110,21 @@ module.exports = class Contenedor{
         }
     }
     updateById = async(id, body)=>{
+
         try {
-            const productos = await this.getAll();
-            const productPos = productos.findIndex(elm=>elm.id === id);
-            productos[productPos] = {
-                id:id,
-                ...body
-            };
-            await fs.promises.writeFile(this.nameFile, JSON.stringify(productos, null, 2))
-            return productos;
+			const contenido = await fs.promises.readFile(this.nameFile, 'utf-8');
+			if (contenido) {
+				const data = JSON.parse(contenido);
+				const newArray = data.map((item) =>
+					item.id === id ? { ...item, ...body } : item
+				);
+				await fs.promises.writeFile(this.nameFile,JSON.stringify(newArray, null, 2));
+				return newArray.find((item) => item.id === id) || null;
+               
+			} else {
+				throw new Error('No se encontró ningún producto para actualizar');
+			}
+		
         } catch (error) {
             console.log(error)
         }

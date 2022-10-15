@@ -3,7 +3,7 @@ const express = require("express");
 const Contenedor = require("../container");
 const productsRouter = express.Router();
 
-const contenedor = new Contenedor(`productos`)
+const contenedor = new Contenedor(`productos.txt`)
 
 productsRouter.get("/", async(req,res) =>{
     try {
@@ -35,28 +35,47 @@ productsRouter.post("/",async(req,res)=>{
         mensaje:"producto creado",
         response: product
     })
-})
-productsRouter.put("/:id", async(req,res)=>{
+}) 
+productsRouter.put(`/:id`, async(req,res)=>{
     try {
-        const {id} = req.params;
+		const {id} = req.params;
         console.log(id)
-        const newInfo = req.body;
-        console.log(newInfo)
-        const productosActualizados = await contenedorProductos.updateById(parseInt(id),newInfo);
-        console.log(productosActualizados)
-        res.json({
-            message:`El producto con el id ${id} fue actualizado`,
-            response: productosActualizados
-        })
-    } catch (error) {
-        
-    }
+		const updateProduct = req.body;
+        console.log(updateProduct)
+		const updatedProduct = await contenedor.updateById(parseInt(id),updateProduct);
+		console.log(updatedProduct);
+		if (updatedProduct) {
+			res.status(200).json({
+				message: 'Producto actualizado',
+				updatedProduct,
+			});
+		} else {
+			res.status(404).json({
+				error: 'No se puede actualizar el producto porque no existe',
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
 })
 
-productsRouter.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    const respuesta = contenedor.deleteById(Number(id));
-    res.render("borrarProducto",{respuesta})
+productsRouter.delete("/:id", async(req, res) => {
+    try {
+		const { id } = req.params;
+		const deleteProduct = await contenedor.deleteById(parseInt(id));
+		if (deleteProduct) {
+			res.status(200).json({
+				message: 'Producto eliminado exitosamente',
+				deletedProductId: deleteProduct.id,
+			});
+		} else {
+			res.status(404).json({
+				error: 'No existe el producto que desea eliminar',
+			});
+		}
+	} catch (err) {
+		console.log(err);
+	}
 })
 
 module.exports = productsRouter;

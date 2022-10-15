@@ -7,20 +7,20 @@
   },
   {
     "id": 2,
-    "title": "Pantalon",
-    "precio": 3000,
-    "thumbnail": "https://media.istockphoto.com/photos/mens-trousers-picture-id510615049?k=20&m=510615049&s=612x612&w=0&h=V2qWdnou1w6ctJnfiRlYxQp6QwgX8yRMBBOCMxm7ei0="
-  },
-  {
-    "id": 3,
     "title": "Gorra",
     "precio": 1000,
     "thumbnail": "https://imagenes.elpais.com/resizer/qzkDXlLmWSlk6fCGa0UjClIKmTg=/1960x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/YBLG7EP57BAD7N256VY3EK5AVA.png"
   },
   {
-    "id": 4,
+    "id": 3,
     "title": "Chaqueta",
     "precio": 4000,
     "thumbnail": "https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2018/10/09/15390838837346.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Relog",
+    "precio": 1500,
+    "thumbnail": "https://media.istockphoto.com/photos/mens-trousers-picture-id510615049?k=20&m=510615049&s=612x612&w=0&h=V2qWdnou1w6ctJnfiRlYxQp6QwgX8yRMBBOCMxm7ei0="
   }
 ]
