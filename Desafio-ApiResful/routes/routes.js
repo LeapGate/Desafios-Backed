@@ -46,12 +46,12 @@ productsRouter.put(`/:id`, async(req,res)=>{
 		console.log(updatedProduct);
 		if (updatedProduct) {
 			res.status(200).json({
-				message: 'Producto actualizado',
+				message: "Producto actualizado",
 				updatedProduct,
 			});
 		} else {
 			res.status(404).json({
-				error: 'No se puede actualizar el producto porque no existe',
+				error: "No se puede actualizar el producto porque no existe",
 			});
 		}
 	} catch (err) {
@@ -65,12 +65,12 @@ productsRouter.delete("/:id", async(req, res) => {
 		const deleteProduct = await contenedor.deleteById(parseInt(id));
 		if (deleteProduct) {
 			res.status(200).json({
-				message: 'Producto eliminado exitosamente',
+				message: "Producto eliminado exitosamente",
 				deletedProductId: deleteProduct.id,
 			});
 		} else {
 			res.status(404).json({
-				error: 'No existe el producto que desea eliminar',
+				error: "No existe el producto que desea eliminar",
 			});
 		}
 	} catch (err) {

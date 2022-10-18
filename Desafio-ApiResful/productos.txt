@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Remera",
-    "precio": 2000,
+    "precio": 6000,
     "thumbnail": "https://media1.sistemacontinuo.com.ar/5289/remera-hombre-sublimable.jpg"
   },
   {

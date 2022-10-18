@@ -86,12 +86,12 @@ module.exports = class Contenedor{
     }   
     deleteById = async (id)=> {
         try {
-			const contenido = await fs.promises.readFile(this.nameFile, 'utf-8');
+			const contenido = await fs.promises.readFile(this.fileName, 'utf-8');
 			if (contenido) {
 				const data = JSON.parse(contenido);
 				const newProductList = data.filter((item) => item.id !== id);
 
-				await fs.promises.writeFile(this.nameFile,JSON.stringify(newProductList, null, 2));
+				await fs.promises.writeFile(this.fileName,JSON.stringify(newProductList, null, 2));
 				return data.find((item) => item.id === id) || null;
 			} else {
 				throw new Error('No se encontró ningún producto para borrar');
@@ -112,13 +112,13 @@ module.exports = class Contenedor{
     updateById = async(id, body)=>{
 
         try {
-			const contenido = await fs.promises.readFile(this.nameFile, 'utf-8');
+			const contenido = await fs.promises.readFile(this.fileName, 'utf-8');
 			if (contenido) {
 				const data = JSON.parse(contenido);
 				const newArray = data.map((item) =>
 					item.id === id ? { ...item, ...body } : item
 				);
-				await fs.promises.writeFile(this.nameFile,JSON.stringify(newArray, null, 2));
+				await fs.promises.writeFile(this.fileName,JSON.stringify(newArray, null, 2));
 				return newArray.find((item) => item.id === id) || null;
                
 			} else {
