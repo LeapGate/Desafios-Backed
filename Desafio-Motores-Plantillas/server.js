@@ -18,7 +18,10 @@ app.use(express.static("public"));
 
 app.engine(`hbs`,engine({extname: `.hbs`})); 
 app.set(`view engine`, `hbs`)  
-app.set(`views`, `./handlebars/views`);
+app.set(`views`, `./handlebars/views`); 
+
+/* app.set(`views`, `./pug/views`);
+app.set(`view engine`, `pug`); */
 
 
 app.listen(PORT,()=>{

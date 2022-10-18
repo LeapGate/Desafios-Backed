@@ -19,8 +19,20 @@
   },
   {
     "id": 4,
-    "title": "Relog",
+    "title": "Pantalon",
     "precio": 1500,
     "thumbnail": "https://media.istockphoto.com/photos/mens-trousers-picture-id510615049?k=20&m=510615049&s=612x612&w=0&h=V2qWdnou1w6ctJnfiRlYxQp6QwgX8yRMBBOCMxm7ei0="
+  },
+  {
+    "id": 5,
+    "title": "chamarra",
+    "precio": "1000",
+    "thumbnail": "https://m.media-amazon.com/images/I/6172d4LUKuL._AC_SX569_.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Bufanda",
+    "precio": "1500",
+    "thumbnail": "https://st.depositphotos.com/1177973/1768/i/600/depositphotos_17682637-stock-photo-warm-knitted-scarf-pink-isolated.jpg"
   }
 ]
